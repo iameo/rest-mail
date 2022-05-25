@@ -5,6 +5,7 @@
 #### How to run:
 - fork repo and clone; cd into folder on your machine
 - rename .env-example to .env and populate accordingly
+- ```cmd: pip install -r requirements.txt``` to get packages for this project
 - ```cmd: python slov.py```
 
 

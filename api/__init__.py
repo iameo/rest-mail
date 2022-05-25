@@ -7,6 +7,8 @@ from flask_pymongo import PyMongo
 
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
 
 app = flask.Flask(__name__)
 

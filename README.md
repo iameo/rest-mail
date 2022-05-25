@@ -10,4 +10,20 @@
 
 
 #### Routes
-kindly check the api/resources.py file to see runnable routes
+* localhost:5000/register [POST method]
+  
+  required json: ```{
+        "username": "xxxx",
+        "email": "xxxx@xx.com,
+        "password": "*****",
+        "password2": "*****"
+    }```
+
+* localhost:5000/login [POST method]
+
+    required json: ```{
+        "username": "xxxx",
+        "password": "*****"
+    }```
+
+* localhost:5000/check-auth [GET Method]

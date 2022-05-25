@@ -27,3 +27,5 @@
     }```
 
 * localhost:5000/check-auth [GET Method]
+
+* localhost:5000/logout [GET method]

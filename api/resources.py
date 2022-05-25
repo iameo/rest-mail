@@ -89,10 +89,10 @@ class Mail(Resource):
             msg = Message(body=f"{body}",
                 sender=from_,
                 subject=subject,
-                recipients=[f"{to}"])
-            
+                recipients=[to])
+           
             try:
-                mail.send_message(msg)
+                mail.send(msg)
             except Exception as e:
                 print(e)
             return flask.jsonify({"status":200, "message":"message sent successfully"})

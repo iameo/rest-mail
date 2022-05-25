@@ -1,7 +1,7 @@
 import flask
 from flask_restful import Resource
 
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from bson.objectid import ObjectId
@@ -46,6 +46,12 @@ class Login(Resource):
                 return login_user(logged_user) if password_check else False
             return flask.jsonify({"message": "user does not exist"})
         return flask.jsonify({"message":"you must enter both username and password to authenticate!"})
+
+
+class Logout(Resource):
+    def get(self):
+        logout_user()
+        return flask.jsonify({"message":"logged out"})
 
 
 class Register(Resource):
@@ -103,5 +109,6 @@ class Mail(Resource):
 
 api.add_resource(CheckAuth, '/check-auth')
 api.add_resource(Login, '/login')
+api.add_resource(Logout, '/logout')
 api.add_resource(Register, '/register')
 api.add_resource(Mail, '/mail')

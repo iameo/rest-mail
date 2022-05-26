@@ -25,6 +25,9 @@ app.config['MAIL_SUPPRESS_SEND'] = os.getenv('MAIL_SUPPRESS_SEND')
 app.config['MAIL_DEBUG'] = os.getenv('MAIL_DEBUG')
 app.config['TESTING'] = False
 
+
+mail = Mail(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -38,7 +41,6 @@ db = mongo.db.userz
 #instantiate flask-restful
 api = Api(app)
 
-#instantiate Flask-Mail
-mail = Mail(app)
+
 
 from api import resources

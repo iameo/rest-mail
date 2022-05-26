@@ -12,10 +12,7 @@ from api.model import User
 
 from flask_mail import Mail, Message
 
-
-def fetch_json():
-    _json = flask.request.json
-    return _json
+from api.utils import fetch_json, mailer_func
 
 
 
@@ -85,24 +82,12 @@ class Mail(Resource):
     @login_required
     def post(self):
         '''get email from current logged on user'''
-        sender = db.find_one({"_id": ObjectId(current_user.get_id())})
-        _json = fetch_json()
-        from_ = sender["email"]
-        to = _json["to"]
-        subject = _json["subject"]
-        body = _json["body"]
-        if to and body:
-            msg = Message(body=f"{body}",
-                sender=from_,
-                subject=subject,
-                recipients=[to])
-           
-            try:
-                mail.send(msg)
-            except Exception as e:
-                print(e)
-            return flask.jsonify({"status":200, "message":"message sent successfully"})
-        return flask.jsonify({"status":400, "message":"mail should have at least a recipent and a body"})
+        mailer = mailer_func()
+        try:
+            mailer()
+        except Exception as e: #in prod, you'd want to catch specific exceptions
+            return flask.jsonify({"status":400, "message":"failed", "error": str(e)})
+        return flask.jsonify({"status":200, "message":"message sent successfully"})
 
 
 
